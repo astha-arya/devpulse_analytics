@@ -16,9 +16,11 @@ interface DeviceBreakdown {
 
 interface AnalyticsCore {
   totalClicks: number;
+  uniqueClicks: number; // Phase 4: unique visitor count
   clicksByDate: Record<string, number>; // ✅ backend sends object, not array
   deviceBreakdown: Partial<DeviceBreakdown>; // ✅ may be missing keys
   recentClicks: ClickData[];
+  locations: Record<string, number>;
 }
 
 interface AnalyticsResponse {

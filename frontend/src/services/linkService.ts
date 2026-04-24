@@ -3,6 +3,9 @@ import api from './api';
 interface ShortenData {
   originalUrl: string;
   customAlias?: string;
+  expiresAt?: string;  
+  maxClicks?: number; 
+  password?: string;   
 }
 
 interface Link {

@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Analytics from './pages/Analytics';
+import PasswordGate from "./components/PasswordGate";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/p/:shortId" element={<PasswordGate />} />
           <Route
             path="/dashboard"
             element={
@@ -25,6 +27,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          
           <Route
             path="/analytics/:shortId"
             element={

@@ -16,6 +16,45 @@ const clickSchema = new mongoose.Schema({
   referrer: {
     type: String,
     default: ''
+  },
+  // --- Phase 2: UTM Parameter Fields ---
+  utm_source: {
+    type: String,
+    default: null
+  },
+  utm_medium: {
+    type: String,
+    default: null
+  },
+  utm_campaign: {
+    type: String,
+    default: null
+  },
+  utm_term: {
+    type: String,
+    default: null
+  },
+  utm_content: {
+    type: String,
+    default: null
+  },
+  // --- Phase 3: Geographic Fields ---
+  country: {
+    type: String,
+    default: null
+  },
+  city: {
+    type: String,
+    default: null
+  },
+  // --- Phase 4: Fingerprint & Unique Visitor Fields ---
+  fingerprint: {
+    type: String,
+    default: null
+  },
+  isUnique: {
+    type: Boolean,
+    default: true
   }
 });
 
@@ -43,8 +82,8 @@ const urlSchema = new mongoose.Schema({
     required: true
   },
   clicks: {
-  type: [clickSchema],
-  default: []   // ensures new URLs always start with empty array
+    type: [clickSchema],
+    default: [] 
   },
   createdAt: {
     type: Date,
@@ -52,6 +91,15 @@ const urlSchema = new mongoose.Schema({
   },
   expiresAt: {
     type: Date,
+    default: null
+  },
+  // --- Phase 1 Fields ---
+  maxClicks: {
+    type: Number,
+    default: null
+  },
+  password: {
+    type: String,
     default: null
   }
 });
@@ -64,7 +112,6 @@ urlSchema.index({ createdAt: -1 });
 urlSchema.virtual('totalClicks').get(function() {
   return this.clicks ? this.clicks.length : 0;
 });
-
 
 // Ensure virtuals are included in JSON
 urlSchema.set('toJSON', { virtuals: true });

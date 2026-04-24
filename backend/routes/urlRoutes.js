@@ -5,7 +5,8 @@ const {
   redirectUrl,
   getUserLinks,
   getAnalytics,
-  deleteLink
+  deleteLink,
+  verifyPasswordAndRedirect // --- NEW PHASE 1 IMPORT ---
 } = require('../controllers/urlController');
 const authMiddleware = require('../middleware/auth');
 
@@ -28,6 +29,11 @@ router.get('/analytics/:shortId', authMiddleware, getAnalytics);
 // @desc    Delete a short link
 // @access  Private
 router.delete('/links/:shortId', authMiddleware, deleteLink);
+
+// @route   POST /:shortId/verify
+// @desc    Verify Password and Return Original URL
+// @access  Public
+router.post('/:shortId/verify', verifyPasswordAndRedirect); // --- NEW PHASE 1 ROUTE ---
 
 // @route   GET /:shortId
 // @desc    Redirect to original URL and log click
