@@ -77,9 +77,17 @@ const buildFingerprint = (ip, userAgent) => {
 // Helper: resolve the real client IP, stripping IPv6-mapped IPv4 prefixes
 // so that geoip-lite (which expects plain IPv4) can look them up correctly.
 const resolveIp = (req) => {
+  // 1. Check the 'x-forwarded-for' header (standard for Render/Vercel/Proxies)
+  const forwarded = req.headers['x-forwarded-for'];
+  
+  if (forwarded) {
+    // If there are multiple IPs (comma separated), the first one is the real client
+    return forwarded.split(',')[0].trim().replace(/^::ffff:/, '');
+  }
+
+  // 2. Fallback to standard request IP
   const raw = req.ip || req.connection.remoteAddress || 'unknown';
-  // Strip IPv6-mapped IPv4 prefix "::ffff:"
-  return raw.startsWith('::ffff:') ? raw.slice(7) : raw;
+  return raw.replace(/^::ffff:/, '');
 };
 
 // @desc    Create a short URL
