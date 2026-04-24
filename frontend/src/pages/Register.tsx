@@ -45,7 +45,7 @@ export default function Register() {
           <div className="flex justify-center mb-4">
             <LinkIcon className="w-16 h-16 text-blue-600" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">LinkTrackr</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">DevPulse</h1>
           <p className="text-gray-600">Create your account</p>
         </div>
 
