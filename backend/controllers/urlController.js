@@ -232,7 +232,7 @@ const redirectUrl = async (req, res) => {
     const city    = (geo && geo.city)    ? geo.city    : null;
 
     // --- Phase 4: Rate limiting ---
-    const rateLimitKey = `rate_limit:${shortId}:${clientIp}`;
+    const rateLimitKey = `devpulse:rate_limit:${shortId}:${clientIp}`;
     const blocked = await isRateLimited(rateLimitKey, 100, 60);
     if (blocked) {
       return res.status(429).json({ error: 'Too many requests. Please slow down.' });
